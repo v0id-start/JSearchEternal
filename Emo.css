@@ -1,0 +1,35 @@
+/*
+#212121 - light black for bg
+#121212 - dark black for features?
+#bb85fd - violet for buttons, black text
+#2e2e2e - grey for input text box with violet prompt text and white words
+#0ecdbb - cyan for ...things...
+*/
+
+.root{
+
+    -fx-background-color: #212121;
+    -fx-font-size: 14pt;
+}
+
+.menu-button
+{
+    -fx-background-color: #121212;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20pt;
+}
+
+.menu-button:hover
+{
+    -fx-background-color: #2e2e2e;
+}
+
+.menu-button:pressed
+{
+    -fx-background-color: #1a1a1a;
+}
+
+.label
+{
+    -fx-text-fill: #f7f7f7;
+}
