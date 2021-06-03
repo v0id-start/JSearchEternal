@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -12,21 +13,25 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.RowConstraints;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
     Scene menuScene;
 
     public Button menuButton;
-    public GridPane gridPane;
+    public Button solveButton;
 
+    public GridPane gridPane;
+    public GridPane wordGrid;
 
 
     public void goToMenu() throws IOException {
-        Stage window = (Stage) menuButton.getScene().getWindow();
+        Stage window = (Stage) solveButton.getScene().getWindow();
 
         Parent root = FXMLLoader.load(getClass().getResource("menu.fxml"));
 
@@ -34,17 +39,79 @@ public class GameController implements Initializable {
         window.setScene(menuScene);
     }
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        for (int i = 0; i < 10; i++)
+        // Set number of rows and cols based on selected difficulty
+        int difficulty = GameManager.getDifficulty();
+        int numRows = 18;
+        int numCols = 12;
+
+        switch (difficulty)
         {
-            for (int j = 0; j < 12; j++)
+            case (1):
             {
-                Button b = new Button("A");
-                gridPane.add(b,i,j);
+                numRows = 22;
+                numCols = 8;
+                break;
+            }
+            case (2):
+            {
+                numRows = 18;
+                numCols = 12;
+                break;
+            }
+            case (3):
+            {
+                numRows = 23;
+                numCols = 16;
+                break;
             }
 
+
+        }
+
+        // Build and display gridpane of buttons from 2d char array board
+        WordSearchBoard wsBoard = new WordSearchBoard(numRows, numCols, 1000);
+        char[][] charBoard = wsBoard.getBoard();
+        //LetterCell[][] cellBoard = new LetterCell[10][12];
+
+
+        for (int r = 0; r < charBoard.length; r++)
+        {
+            for (int c = 0; c < charBoard[0].length; c++)
+            {
+                Button cellButton = new Button(Character.toString(charBoard[r][c]));
+                cellButton.getStyleClass().add("letter-cell");
+
+                cellButton.setMaxWidth(Double.MAX_VALUE);
+                cellButton.setMaxHeight(Double.MAX_VALUE);
+
+                LetterCell currentCell = new LetterCell(cellButton, r, c);
+                currentCell.getButton().setOnAction(event -> currentCell.toggleButton());
+
+                gridPane.add(cellButton, r, c);
+            }
+
+        }
+
+        ArrayList<String> wordList = wsBoard.getPlacedWords();
+
+        int wordColumns = (int)Math.sqrt(wordList.size());
+        int wordRows = (int)Math.ceil(wordList.size() / (float)wordColumns);
+
+        int wordInd = 0;
+
+        for (int r = 0; r < wordRows; r++)
+        {
+            for (int c = 0; c < wordColumns; c++)
+            {
+                Label wordLabel = new Label(wordList.get(wordInd));
+                wordGrid.add(wordLabel, r, c);
+                wordInd++;
+            }
         }
 
 

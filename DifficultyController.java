@@ -19,27 +19,27 @@ public class DifficultyController {
 
     public void setDifficultyEasy()
     {
-        play("easy");
+        play(1);
     }
 
     public void setDifficultyNormal()
     {
-        play("normal");
+        play(2);
     }
 
-    public void setDifficultyHard()
-    {
-        play("hard");
-    }
+    public void setDifficultyHard() { play(3); }
 
-    public void play(String difficulty) {
+    public void play(int difficulty) {
         Stage window = (Stage) easyButton.getScene().getWindow();
+
+        GameManager.setDifficulty(difficulty);
 
         try
         {
             Parent root = FXMLLoader.load(getClass().getResource("game.fxml"));
 
-            gameScene = new Scene(root, 800, 1000);
+            gameScene = new Scene(root, 1920, 1080);
+            window.setMaximized(true);
             window.setScene(gameScene);
         }
         catch(Exception e)

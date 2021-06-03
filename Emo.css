@@ -44,6 +44,20 @@
     -fx-font-size: 1em;
 }
 
+.letter-cell
+{
+    -fx-background-color: #121212;
+    -fx-text-fill: #f7f7f7;
+    -fx-border-color:white;
+    -fx-border-width: 0.5 0.5 0.5 0.5;
+    -fx-font-size: 25px;
+}
+
+.letter-cell:hover
+{
+    -fx-background-color: #2e2e2e;
+}
+
 .chart-legend {
    -fx-background-color: #2e2e2e;
    -fx-stroke: #f7f7f7;

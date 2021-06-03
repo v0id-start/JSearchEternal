@@ -46,6 +46,15 @@ public class WordSearchBoard {
     }
 
 
+    public char[][] getBoard()
+    {
+        return this.board;
+    }
+
+    public ArrayList<String> getPlacedWords()
+    {
+        return this.placedWords;
+    }
     /**
      * Attempts to place each word on board with random orientation
      * Will skip word if it is longer than horizontal/vertical bounds

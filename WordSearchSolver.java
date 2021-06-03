@@ -24,38 +24,36 @@ public class WordSearchSolver {
         {
             boolean found = false;
 
-                for (int r = 0; r < board.length && !found; r++)
+            for (int r = 0; r < board.length && !found; r++)
+            {
+                for (int c = 0; c < board[0].length && !found; c++)
                 {
-                    for (int c = 0; c < board[0].length && !found; c++)
+
+                    for (String dir : directions)
                     {
-
-                        for (String dir : directions)
+                        if (checkWord(board, c, r, dir, word))
                         {
-                            if (checkWord(board, c, r, dir, word))
-                            {
-                                System.out.println(word + " FOUND AT " + r + " " + c + " " + " GOING " + dir.toUpperCase());
-                                found = true;
-                            }
-
-                            if (found)
-                                break;
+                            System.out.println(word + " FOUND AT " + r + " " + c + " " + " GOING " + dir.toUpperCase());
+                            found = true;
                         }
 
+                        if (found)
+                            break;
                     }
+
                 }
             }
-
-            return new char[][] {{'.','.'},{'.','.'}};
-
         }
+
+        return new char[][] {{'.','.'},{'.','.'}};
+
+    }
 
 
 /*
 . . . .
 . . . .
 . . . .
-
-
  */
 
     public static boolean checkWord(char[][] board, int x, int y, String dir, String word)
@@ -90,4 +88,3 @@ public class WordSearchSolver {
         return true;
     }
 }
-
