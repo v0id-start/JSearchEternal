@@ -13,7 +13,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1000.0" prefWidth="800.0" stylesheets="@Emo.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wordsearch.GameController">
    <padding>
       <Insets bottom="20.0" left="30.0" right="30.0" top="30.0" />
@@ -29,4 +28,20 @@
          </BorderPane.margin>
       </HBox>
    </bottom>
+   <center>
+      <GridPane fx:id="gridPane" BorderPane.alignment="CENTER">
+         <rowConstraints>
+            <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" />
+         </rowConstraints>
+      </GridPane>
+   </center>
+   <top>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </top>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+   </right>
 </BorderPane>

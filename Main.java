@@ -34,16 +34,13 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("menu.fxml"));
         window = primaryStage;
-
+        window.setTitle("J SEARCH ETERNAL");
         menuScene = new Scene(root, 800, 1000);
 
         window.setScene(menuScene);
 
         window.show();
 
-        WordSearchBoard ws = new WordSearchBoard(12, 18, 1000);
-        ws.printBoard(true);
-        ws.printBoard(false);
     }
 
 

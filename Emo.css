@@ -33,3 +33,18 @@
 {
     -fx-text-fill: #f7f7f7;
 }
+
+.chart-pie
+{
+    -fx-background-color: #bb85fd;
+}
+
+.chart-pie-label {
+    -fx-fill: #f7f7f7;
+    -fx-font-size: 1em;
+}
+
+.chart-legend {
+   -fx-background-color: #2e2e2e;
+   -fx-stroke: #f7f7f7;
+}
