@@ -1,4 +1,4 @@
-package com.company;
+package wordsearch;
 
 import java.util.*;
 
