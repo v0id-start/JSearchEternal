@@ -9,6 +9,8 @@ public class WordSearchBoard {
 
     private HashMap<String, int[]> DIRS = WordFunc.getDIRS();
 
+    private HashMap<String, Coordinate[]> wordToCoordinates;
+
     private ArrayList<String> words = new ArrayList<String>();
     private ArrayList<String> placedWords = new ArrayList<String>();
 
@@ -26,6 +28,7 @@ public class WordSearchBoard {
         this.numRows = rows;
         this.numCols = cols;
 
+        wordToCoordinates = new HashMap<String, Coordinate[]>();
         this.threshold = thresholdNum;
 
         // Board will be filled in with random chars while answer board only has the words
@@ -54,6 +57,11 @@ public class WordSearchBoard {
     public ArrayList<String> getPlacedWords()
     {
         return this.placedWords;
+    }
+
+    public HashMap<String, Coordinate[]> getWordToCoordinates()
+    {
+        return this.wordToCoordinates;
     }
     /**
      * Attempts to place each word on board with random orientation
@@ -94,26 +102,32 @@ public class WordSearchBoard {
         while (!placed)
         {
             // Get random coordinates for row & col
-            int xPos = (int) (Math.random()*numCols);
-            int yPos = (int) (Math.random()*numRows);
+            int colNum = (int) (Math.random()*numCols);
+            int rowNum = (int) (Math.random()*numRows);
 
             // Get random direction out of 8 including diagonals
             String[] directions = {"n","ne","e","se","s","sw","w","nw"};
             String direction = directions[(int) (Math.random()*directions.length)];
 
             // If word stays within bounds of board and overlaps properly with other letters, place word
-            boolean wordIsValid = checkPlacement(xPos, yPos, direction, word);
+            boolean wordIsValid = checkPlacement(colNum, rowNum, direction, word);
             if (wordIsValid)
             {
+                Coordinate[] coordinateSet = new Coordinate[word.length()];
+
                 for (int i = 0; i < word.length(); i++)
                 {
-                    board[yPos][xPos] = word.charAt(i);
+                    board[rowNum][colNum] = word.charAt(i);
 
+                    // Coordinate object that stores x and y?
+                    // Would have compare method to other coordinates... might make checking selected squares easier
+                    coordinateSet[i] = new Coordinate(rowNum, colNum);
                     // Access direction hashmap that stores positive/negative int on x and y based on direction
-                    xPos += DIRS.get(direction)[0];
-                    yPos += DIRS.get(direction)[1];
+                    colNum += DIRS.get(direction)[0];
+                    rowNum += DIRS.get(direction)[1];
                 }
 
+                this.wordToCoordinates.put(word, coordinateSet);
                 placed = true;
             }
 

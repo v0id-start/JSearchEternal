@@ -1,21 +1,22 @@
 package wordsearch;
 
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 
 public class LetterCell {
 
     private Button button;
-    private int row;
-    private int col;
+    private Coordinate location;
+    private boolean isToggleable;
 
     private boolean isToggled;
 
 
-    public LetterCell(Button b, int r, int c)
+    public LetterCell(Button b, Coordinate loc)
     {
         this.button = b;
-        this.row = r;
-        this.col = c;
+        this.location = loc;
+        this.isToggleable = true;
         this.isToggled = false;
     }
 
@@ -29,18 +30,35 @@ public class LetterCell {
         this.isToggled = newValue;
     }
 
+    public void setIsToggleable(boolean newValue)
+    {
+        this.isToggleable = newValue;
+    }
+
+    public void setFound()
+    {
+        this.setIsToggleable(false);
+        this.getButton().setStyle("-fx-background-color: #1a6e35;");
+    }
+
     void toggleButton()
     {
-        if (!this.isToggled)
+        if (!this.isToggled && this.isToggleable)
         {
             this.button.setStyle("-fx-background-color: #421c7a;");
-            GameManager.addSelectedIndex(this.col, this.row);
+            String wordFound = GameManager.addSelectedCoordinate(this.location);
             this.setIsToggled(true);
-           }
-        else if (this.isToggled)
+
+            if (!wordFound.equals(""))
+            {
+                System.out.println("wow");
+            }
+
+        }
+        else if (this.isToggled && this.isToggleable)
         {
             this.button.setStyle("-fx-background-color: #121212;");
-            GameManager.removeSelectedIndex(this.col, this.row);
+            GameManager.removeSelectedCoordinate(this.location);
             this.setIsToggled(false);
         }
     }

@@ -76,8 +76,9 @@ public class GameController implements Initializable {
         // Build and display gridpane of buttons from 2d char array board
         WordSearchBoard wsBoard = new WordSearchBoard(numRows, numCols, 1000);
         char[][] charBoard = wsBoard.getBoard();
-        //LetterCell[][] cellBoard = new LetterCell[10][12];
 
+        LetterCell[][] cellBoard = new LetterCell[charBoard.length][charBoard[0].length];
+        GameManager.setWordToCoordinates(wsBoard.getWordToCoordinates());
 
         for (int r = 0; r < charBoard.length; r++)
         {
@@ -89,14 +90,23 @@ public class GameController implements Initializable {
                 cellButton.setMaxWidth(Double.MAX_VALUE);
                 cellButton.setMaxHeight(Double.MAX_VALUE);
 
-                LetterCell currentCell = new LetterCell(cellButton, r, c);
+                Coordinate cellLocation = new Coordinate(r, c);
+                LetterCell currentCell = new LetterCell(cellButton, cellLocation);
+                cellBoard[r][c] = currentCell;
+
                 currentCell.getButton().setOnAction(event -> currentCell.toggleButton());
 
                 gridPane.add(cellButton, r, c);
+
             }
 
         }
 
+        GameManager.setCellBoard(cellBoard);
+
+
+
+        /*
         ArrayList<String> wordList = wsBoard.getPlacedWords();
 
         int wordColumns = (int)Math.sqrt(wordList.size());
@@ -114,9 +124,10 @@ public class GameController implements Initializable {
             }
         }
 
+         */
+
 
 
     }
 
 }
-
