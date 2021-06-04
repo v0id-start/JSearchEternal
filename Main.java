@@ -32,6 +32,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         Parent root = FXMLLoader.load(getClass().getResource("menu.fxml"));
         window = primaryStage;
         window.setTitle("J SEARCH ETERNAL");

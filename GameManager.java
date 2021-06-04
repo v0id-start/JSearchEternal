@@ -1,6 +1,7 @@
 package wordsearch;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -13,13 +14,15 @@ public class GameManager {
     public static HashMap<String, Coordinate[]> wordToCoordinates;
     static ArrayList<Coordinate> selectedCoordinates = new ArrayList<Coordinate>();
 
+
+    public static HashMap<String, Label> wordLegend = new HashMap<>();
+
     public static LetterCell[][] cellBoard;
+
 
     public static void setCellBoard(LetterCell[][] cells)
     {
-        System.out.println(wordToCoordinates.get("APPLE")[0].getX() + " " + wordToCoordinates.get("APPLE")[0].getY());
-        System.out.println(wordToCoordinates.get("ORANGE")[0].getX() + " " + wordToCoordinates.get("ORANGE")[0].getY());
-        System.out.println(wordToCoordinates.get("STRAW")[0].getX() + " " + wordToCoordinates.get("STRAW")[0].getY());
+
         cellBoard = cells;
     }
 
@@ -38,6 +41,15 @@ public class GameManager {
     {
         wordToCoordinates = wordToCoordinatesMap;
     }
+
+    public static void setWordLegend(Label[] labelArray)
+    {
+        for (Label wordLabel : labelArray)
+        {
+            wordLegend.put(wordLabel.getText(), wordLabel);
+        }
+    }
+
 
     public static String addSelectedCoordinate(Coordinate c)
     {
@@ -84,6 +96,9 @@ public class GameManager {
 
         if (wordFound)
         {
+            // Cross out word
+            wordLegend.get(wordText).setStyle("-fx-text-fill: #5af72a;");
+
             System.out.println(wordText + " WAS FOUND!");
             wordToCoordinates.remove(wordText);
 
@@ -106,7 +121,6 @@ public class GameManager {
         for (Coordinate correctCoordinate : foundCoordinates)
         {
             cellBoard[correctCoordinate.getX()][correctCoordinate.getY()].setFound();
-            removeSelectedCoordinate(correctCoordinate);
         }
         System.out.println(wordToCoordinates.size());
 

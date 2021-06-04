@@ -48,6 +48,9 @@ public class GameController implements Initializable {
         int difficulty = GameManager.getDifficulty();
         int numRows = 18;
         int numCols = 12;
+        int wordRows = 2;
+        int wordCols = 6;
+
 
         switch (difficulty)
         {
@@ -55,18 +58,27 @@ public class GameController implements Initializable {
             {
                 numRows = 22;
                 numCols = 8;
+
+                wordRows = 4;
+                wordCols = 3;
                 break;
             }
             case (2):
             {
                 numRows = 18;
                 numCols = 12;
+
+                wordRows = 7;
+                wordCols = 3;
                 break;
             }
             case (3):
             {
                 numRows = 23;
                 numCols = 16;
+
+                wordRows = 10;
+                wordCols = 4;
                 break;
             }
 
@@ -105,26 +117,27 @@ public class GameController implements Initializable {
         GameManager.setCellBoard(cellBoard);
 
 
-
-        /*
+        // Generate legend of words at bottom of screen
         ArrayList<String> wordList = wsBoard.getPlacedWords();
-
-        int wordColumns = (int)Math.sqrt(wordList.size());
-        int wordRows = (int)Math.ceil(wordList.size() / (float)wordColumns);
+        Label[] wordLegend = new Label[wordList.size()];
 
         int wordInd = 0;
 
-        for (int r = 0; r < wordRows; r++)
+        for (int r = 0; r < wordCols; r++)
         {
-            for (int c = 0; c < wordColumns; c++)
+            for (int c = 0; c < wordRows; c++)
             {
                 Label wordLabel = new Label(wordList.get(wordInd));
                 wordGrid.add(wordLabel, r, c);
+                wordLegend[wordInd] = wordLabel;
+
                 wordInd++;
             }
         }
 
-         */
+        GameManager.setWordLegend(wordLegend);
+
+
 
 
 
