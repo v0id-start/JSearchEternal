@@ -23,9 +23,7 @@ public class Main extends Application {
     Stage window;
 
     Scene menuScene;
-    Scene difficultyScene;
-    Scene wordListScene;
-    Scene gameScene;
+
     static void main(String[] args) {
         launch(args);
     }

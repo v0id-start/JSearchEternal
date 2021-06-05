@@ -19,7 +19,7 @@
          <children>
             <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="114.0" prefWidth="785.0" text="Select Difficulty">
                <font>
-                  <Font name="Corbel Bold" size="78.0" />
+                  <Font name="Corbel Light" size="78.0" />
                </font>
             </Label>
             <Button fx:id="easyButton" alignment="CENTER" contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setDifficultyEasy" prefHeight="60.0" prefWidth="170.0" styleClass="menu-button" text="Easy" textFill="WHITE">

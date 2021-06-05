@@ -6,10 +6,12 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Random;
 
 public class GameManager {
 
     public static int difficulty;
+    public static boolean won = false;
 
     public static HashMap<String, Coordinate[]> wordToCoordinates;
     static ArrayList<Coordinate> selectedCoordinates = new ArrayList<Coordinate>();
@@ -19,13 +21,57 @@ public class GameManager {
 
     public static LetterCell[][] cellBoard;
 
+    public static Label scoreLabel;
+    public static Label winLabel;
+
+    static int score = 0;
+
+    public static String customTitle = "";
+    public static boolean isCustom = false;
+    public static int customRows = 0;
+    public static int customCols = 0;
+    public static ArrayList<String> customWords = new ArrayList<>();
+
+    public static void resetGame()
+    {
+        won = false;
+
+        wordToCoordinates = new HashMap<>();
+        selectedCoordinates = new ArrayList<Coordinate>();
+
+
+        wordLegend = new HashMap<>();
+
+        score = 0;
+
+        customTitle = "";
+        isCustom = false;
+        customRows = 0;
+        customCols = 0;
+        customWords = new ArrayList<>();
+    }
+
+    public static void setIsCustom(boolean newIsCustomValue)
+    {
+        isCustom = newIsCustomValue;
+    }
 
     public static void setCellBoard(LetterCell[][] cells)
     {
-
         cellBoard = cells;
     }
 
+    public static void setScoreLabel(Label scoreL)
+    {
+        scoreLabel = scoreL;
+        scoreLabel.setText("score: " + score);
+    }
+
+
+    public static void setWinLabel(Label winL)
+    {
+        winLabel = winL;
+    }
 
     public static void setDifficulty(int newDifficulty)
     {
@@ -96,6 +142,10 @@ public class GameManager {
 
         if (wordFound)
         {
+            // Add to score and set label
+            score += 10;
+            scoreLabel.setText("score: " + score);
+
             // Cross out word
             wordLegend.get(wordText).setStyle("-fx-text-fill: #5af72a;");
 
@@ -104,6 +154,7 @@ public class GameManager {
 
             if (wordToCoordinates.size() == 0)
             {
+                winGame();
                 System.out.println("Won");
             }
         }
@@ -123,6 +174,42 @@ public class GameManager {
             cellBoard[correctCoordinate.getX()][correctCoordinate.getY()].setFound();
         }
         System.out.println(wordToCoordinates.size());
+
+    }
+
+    public static void solveBoard()
+    {
+        for (LetterCell[] cellArr : cellBoard)
+        {
+            for (LetterCell cell : cellArr)
+            {
+                if (!won && !cell.getIsToggled())
+                    cell.toggleButton();
+
+            }
+        }
+    }
+
+    public static void winGame()
+    {
+        won = true;
+        winLabel.setOpacity(1);
+        for (LetterCell[] cellArr : cellBoard)
+        {
+            for (LetterCell cell : cellArr)
+            {
+                if (!cell.getIsToggleable())
+                {
+                    String[] colors = {"#ff1929", "#29ff4c", "#f2ff00", "#2185ff", "#00d5ff", "#ffbf00", "#9e1ad6"};
+                    int rnd = new Random().nextInt(colors.length);
+                    String randomColor = colors[rnd];
+                    //cell.getButton().setStyle("-fx-background-color: " + randomColor + ";");
+                }
+                else
+                    cell.getButton().setStyle("-fx-background-color:black;");
+
+            }
+        }
 
     }
 

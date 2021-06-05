@@ -31,7 +31,7 @@
                         <Cursor fx:constant="OPEN_HAND" />
                     </cursor>
                 </Button>
-                <Button fx:id="customButton" alignment="CENTER" contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#playCustom" prefHeight="60.0" prefWidth="170.0" styleClass="menu-button" text="Custom" textFill="WHITE">
+                <Button fx:id="customButton" alignment="CENTER" contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToCustom" prefHeight="60.0" prefWidth="170.0" styleClass="menu-button" text="Custom" textFill="WHITE">
                     <cursor>
                         <Cursor fx:constant="OPEN_HAND" />
                     </cursor>

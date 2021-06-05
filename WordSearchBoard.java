@@ -20,10 +20,12 @@ public class WordSearchBoard {
     private char[][] answerBoard;
     private char[][] board;
 
+    private WordSet wordSet;
+
     // Number of tries to randomly place word on board before skipping
     private int threshold;
 
-    public WordSearchBoard(int rows, int cols, int thresholdNum)
+    public WordSearchBoard(int rows, int cols, int thresholdNum, WordSet wordSetList)
     {
         this.numRows = rows;
         this.numCols = cols;
@@ -36,8 +38,10 @@ public class WordSearchBoard {
         this.answerBoard = new char[rows][cols];
 
         // Read in list of words from file
-        this.words = getWordsFromFile("./t.txt");
+        //this.words = getWordsFromFile("./t.txt");
+        this.words = new ArrayList<>(Arrays.asList(wordSetList.getWordList()));
 
+        System.out.println(this.words);
         this.resetBoard();
 
         // Attempt to place each word with random orientation on board

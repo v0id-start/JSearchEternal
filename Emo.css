@@ -34,6 +34,34 @@
     -fx-text-fill: #f7f7f7;
 }
 
+.choice-box .context-menu
+{
+    -fx-background-color: black;
+}
+
+.choice-box {
+  -fx-background-color: black;
+  -fx-mark-color: #bb85fd; /*arrow color*/
+}
+.choice-box .menu-item > .label { -fx-text-fill: white; }
+.choice-box .menu-item:focused { -fx-background-color: #bb85fd; }
+
+.text-area
+{
+    -fx-text-fill: white;
+}
+
+
+.text-field
+{
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
+
+.text-area .content {
+    -fx-background-color: black;
+}
+
 .chart-pie
 {
     -fx-background-color: #bb85fd;
@@ -52,6 +80,12 @@
     -fx-border-width: 0.5 0.5 0.5 0.5;
     -fx-font-size: 25px;
 }
+
+.legend-label
+{
+    -fx-font-size: 20pt;
+}
+
 
 .letter-cell:hover
 {

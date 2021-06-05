@@ -18,8 +18,9 @@ import javafx.scene.layout.RowConstraints;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
-
+import java.util.concurrent.TimeUnit;
 public class GameController implements Initializable {
     Scene menuScene;
 
@@ -29,28 +30,36 @@ public class GameController implements Initializable {
     public GridPane gridPane;
     public GridPane wordGrid;
 
+    public Label titleLabel;
+    public Label scoreLabel;
+    public Label winLabel;
 
     public void goToMenu() throws IOException {
+        GameManager.resetGame();
+
         Stage window = (Stage) solveButton.getScene().getWindow();
 
         Parent root = FXMLLoader.load(getClass().getResource("menu.fxml"));
 
         menuScene = new Scene(root, 800, 1000);
         window.setScene(menuScene);
+        GameManager.isCustom = false;
     }
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        GameManager.setWinLabel(winLabel);
+        GameManager.setScoreLabel(scoreLabel);
 
         // Set number of rows and cols based on selected difficulty
         int difficulty = GameManager.getDifficulty();
         int numRows = 18;
         int numCols = 12;
-        int wordRows = 2;
-        int wordCols = 6;
 
+
+        int numWords = 12;
 
         switch (difficulty)
         {
@@ -59,8 +68,7 @@ public class GameController implements Initializable {
                 numRows = 22;
                 numCols = 8;
 
-                wordRows = 4;
-                wordCols = 3;
+                numWords = 12;
                 break;
             }
             case (2):
@@ -68,8 +76,7 @@ public class GameController implements Initializable {
                 numRows = 18;
                 numCols = 12;
 
-                wordRows = 7;
-                wordCols = 3;
+                numWords = 20;
                 break;
             }
             case (3):
@@ -77,16 +84,33 @@ public class GameController implements Initializable {
                 numRows = 23;
                 numCols = 16;
 
-                wordRows = 10;
-                wordCols = 4;
+                numWords = 30;
                 break;
             }
 
 
         }
 
+
+
         // Build and display gridpane of buttons from 2d char array board
-        WordSearchBoard wsBoard = new WordSearchBoard(numRows, numCols, 1000);
+        WordSet wordSet = WordSetManager.getRandomWordSet(numWords);
+
+        if (GameManager.isCustom)
+        {
+            numRows = GameManager.customCols;
+            numCols = GameManager.customRows;
+
+            String[] wordArray = new String[GameManager.customWords.size()];
+            for (int i = 0; i < GameManager.customWords.size(); i++)
+                wordArray[i] = GameManager.customWords.get(i).toUpperCase();
+
+            wordSet = new WordSet(GameManager.customTitle, wordArray);
+        }
+
+        titleLabel.setText(wordSet.getTitle());
+
+        WordSearchBoard wsBoard = new WordSearchBoard(numRows, numCols, 1000, wordSet);
         char[][] charBoard = wsBoard.getBoard();
 
         LetterCell[][] cellBoard = new LetterCell[charBoard.length][charBoard[0].length];
@@ -107,7 +131,8 @@ public class GameController implements Initializable {
                 cellBoard[r][c] = currentCell;
 
                 currentCell.getButton().setOnAction(event -> currentCell.toggleButton());
-
+                currentCell.getButton().setOnDragDetected(e -> cellButton.startFullDrag());
+                currentCell.getButton().setOnMouseDragEntered(e -> currentCell.toggleButton());
                 gridPane.add(cellButton, r, c);
 
             }
@@ -121,26 +146,46 @@ public class GameController implements Initializable {
         ArrayList<String> wordList = wsBoard.getPlacedWords();
         Label[] wordLegend = new Label[wordList.size()];
 
+        boolean allWordsPlaced = false;
         int wordInd = 0;
 
-        for (int r = 0; r < wordCols; r++)
+        for (int r = 0; r < wordList.size(); r++)
         {
-            for (int c = 0; c < wordRows; c++)
+            for (int c = 0; c < 3; c++)
             {
-                Label wordLabel = new Label(wordList.get(wordInd));
-                wordGrid.add(wordLabel, r, c);
-                wordLegend[wordInd] = wordLabel;
+                if (!allWordsPlaced)
+                {
+                    Label wordLabel = new Label(wordList.get(wordInd));
+                    wordLabel.getStyleClass().add("legend-label");
+                    wordGrid.add(wordLabel, r, c);
+                    wordLegend[wordInd] = wordLabel;
 
-                wordInd++;
+                    wordInd++;
+
+                    if (wordInd == wordList.size())
+                        allWordsPlaced = true;
+                }
+
             }
         }
 
         GameManager.setWordLegend(wordLegend);
-
-
+        System.out.println("REACHES");
 
 
 
     }
+
+
+    public void solveBoard()
+    {
+
+        GameManager.solveBoard();
+
+    }
+
+
+
+
 
 }

@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     Scene difficultyScene;
+    Scene customScene;
 
     public Button playButton;
     public Button customButton;
@@ -32,9 +33,13 @@ public class Controller implements Initializable {
         window.setScene(difficultyScene);
     }
 
-    public void playCustom()
-    {
-        System.out.println("ok");
+    public void goToCustom() throws IOException {
+        Stage window = (Stage) customButton.getScene().getWindow();
+
+        Parent root = FXMLLoader.load(getClass().getResource("custom.fxml"));
+
+        customScene = new Scene(root, 800, 1000);
+        window.setScene(customScene);
     }
 
     public void exit()

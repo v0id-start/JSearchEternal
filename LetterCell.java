@@ -29,10 +29,19 @@ public class LetterCell {
     {
         this.isToggled = newValue;
     }
+    public boolean getIsToggled()
+    {
+        return this.isToggled;
+    }
 
     public void setIsToggleable(boolean newValue)
     {
         this.isToggleable = newValue;
+    }
+
+    public boolean getIsToggleable()
+    {
+        return this.isToggleable;
     }
 
     public void setFound()
@@ -48,11 +57,6 @@ public class LetterCell {
             this.button.setStyle("-fx-background-color: #421c7a;");
             String wordFound = GameManager.addSelectedCoordinate(this.location);
             this.setIsToggled(true);
-
-            if (!wordFound.equals(""))
-            {
-                System.out.println("wow");
-            }
 
         }
         else if (this.isToggled && this.isToggleable)
