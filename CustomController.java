@@ -39,7 +39,7 @@ public class CustomController implements Initializable {
     public void createBoard() throws IOException {
 
 
-        GameManager.setIsCustom(true);
+        GameManager.isCustom = true;
         GameManager.customRows = (int) numRowsChoice.getValue();
         GameManager.customCols = (int) numColsChoice.getValue();
         GameManager.customTitle = titleInput.getText();

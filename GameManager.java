@@ -51,15 +51,7 @@ public class GameManager {
         customWords = new ArrayList<>();
     }
 
-    public static void setIsCustom(boolean newIsCustomValue)
-    {
-        isCustom = newIsCustomValue;
-    }
 
-    public static void setCellBoard(LetterCell[][] cells)
-    {
-        cellBoard = cells;
-    }
 
     public static void setScoreLabel(Label scoreL)
     {
@@ -68,25 +60,6 @@ public class GameManager {
     }
 
 
-    public static void setWinLabel(Label winL)
-    {
-        winLabel = winL;
-    }
-
-    public static void setDifficulty(int newDifficulty)
-    {
-        difficulty = newDifficulty;
-    }
-
-    public static int getDifficulty()
-    {
-        return difficulty;
-    }
-
-    public static void setWordToCoordinates(HashMap<String, Coordinate[]> wordToCoordinatesMap)
-    {
-        wordToCoordinates = wordToCoordinatesMap;
-    }
 
     public static void setWordLegend(Label[] labelArray)
     {

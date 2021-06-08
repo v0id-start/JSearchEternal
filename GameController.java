@@ -50,11 +50,11 @@ public class GameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        GameManager.setWinLabel(winLabel);
-        GameManager.setScoreLabel(scoreLabel);
+        GameManager.winLabel = winLabel;
+        GameManager.scoreLabel = scoreLabel;
 
         // Set number of rows and cols based on selected difficulty
-        int difficulty = GameManager.getDifficulty();
+        int difficulty = GameManager.difficulty;
         int numRows = 18;
         int numCols = 12;
 
@@ -114,7 +114,7 @@ public class GameController implements Initializable {
         char[][] charBoard = wsBoard.getBoard();
 
         LetterCell[][] cellBoard = new LetterCell[charBoard.length][charBoard[0].length];
-        GameManager.setWordToCoordinates(wsBoard.getWordToCoordinates());
+        GameManager.wordToCoordinates = wsBoard.getWordToCoordinates();
 
         for (int r = 0; r < charBoard.length; r++)
         {
@@ -139,7 +139,7 @@ public class GameController implements Initializable {
 
         }
 
-        GameManager.setCellBoard(cellBoard);
+        GameManager.cellBoard = cellBoard;
 
 
         // Generate legend of words at bottom of screen
