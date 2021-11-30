@@ -6,6 +6,7 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
 
+// Reusable AlertBox with custom message, can be instantiated as an event
 public class AlertBox {
 
     public static void display(String title, String msg)
