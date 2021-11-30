@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+// Menu to load different scenes:
+//difficulty selection, custom generator, or exit
 public class Controller implements Initializable {
     Scene difficultyScene;
     Scene customScene;
@@ -24,6 +26,7 @@ public class Controller implements Initializable {
 
     public PieChart pieChart;
 
+    
     public void goToDifficulty() throws IOException {
         Stage window = (Stage) playButton.getScene().getWindow();
 
@@ -48,6 +51,7 @@ public class Controller implements Initializable {
         window.close();
     }
 
+    // Create visual pie chart for decor
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         PieChart.Data youData = new PieChart.Data("Good at Word Searches", 100);
