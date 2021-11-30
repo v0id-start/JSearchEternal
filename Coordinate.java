@@ -2,6 +2,7 @@ package wordsearch;
 
 import java.util.Objects;
 
+// Manages single set of x,y coordinates for 2d plane
 public class Coordinate {
 
     private int x;
@@ -14,6 +15,7 @@ public class Coordinate {
     }
 
 
+    // 2 coordinates are equal if both x's and y's are equal
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
