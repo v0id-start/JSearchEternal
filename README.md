@@ -14,3 +14,8 @@ Dark theme GUI playable word search game, can read in custom words to generate c
 
 
 ![image](https://user-images.githubusercontent.com/83369455/210315936-add0e601-6ae2-4a9d-9d6c-d8f845cdaf62.png)
+
+# Menu
+
+![image](https://user-images.githubusercontent.com/83369455/210317207-e66e2043-e1c9-48c9-b097-8661d625f3cc.png)
+
